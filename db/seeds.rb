@@ -236,6 +236,51 @@ puts Message.where(user: us3)
 
 puts "tarea 25, hecha"
 
+#tarea 26 
+
+bl5 = Blog.find(5)
+post = Post.where(blog: bl5)
+users = post.pluck(:user_id)
+puts User.where(id: users)
+
+puts "tarea 26, hecha"
+
+#tarea 27 
+
+blg5 = Blog.find(5)
+posts = Post.where(blog: bl5)
+msgs = Message.where(post:posts)
+users = msgs.pluck(:user_id)
+puts User.where(id: users)
+
+puts "Tarea 27, hecha"
+
+#tarea 28
+
+owners = Blog.first.owner
+users = owners.pluck(:user_id)
+User.where(id: users).each do |t|
+  puts "#{t.first_name} #{t.last_name} #{t.email_address}"
+end
+puts "tarea 28, hecha"
+
+#tarea 29
+us1 = User.first
+usul = User.last
+bl1 = Blog.first
+own = Owner.where(user: us1, blog: bl1)
+
+own.update_all(user_id: usul.id)
+
+puts Owner.where(user: us1, blog: bl1).count
+
+puts "Tarea 29, hecha"
+
+
+
+
+
+
 
 
 
