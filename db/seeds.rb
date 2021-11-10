@@ -128,6 +128,116 @@ end
 puts "Post: #{Post.where(blog: ulb, user: us2).count}"
 
 puts "Tarea 17. Hecho."
+#tarea 18
+us3 = User.where(first_name: "Usuario 3").first
+ 
+Blog.all.each do |t|
+ p = Post.new
+ p.blog = Blog.find(t.id)
+ p.blog = Blog.where(id: t.id).first
+ p.blog = t
+ p.user = us3
+ p.title = "title x"
+ p.content = "un contenido cualquiera"
+ p.save
+end
+
+puts "post: #{Post.where(user: us3).count}"
+puts "#{us3.post.count}"
+puts "tarea 18 , hecha"
+#tarea 19
+
+primpub = Post.all[0]
+secpub = Post.all[1]
+
+1.upto(2) do |t|
+  m = Message.new
+  m.post = primpub
+  m.user = us3
+  m.author = "algun author"
+  m.message = "aqui va algun mensaje"
+  m.save
+end
+
+1.upto(3) do |t|
+  m = Message.new
+  m.post = secpub
+  m.user = us3
+  m.author = "algun author"
+  m.message = "aqui va algun mensaje"
+  m.save
+end
+
+puts us3.message.count
+puts Message.where(user: us3).count
+puts "tarea 19, hecha"
+
+#tarea 20
+
+us4 = User.where(first_name: "Usuario 4").first
+ulpub = Post.all.last
+
+1.upto(3) do |t|
+  m = Message.new
+  m.post = ulpub
+  m.user = us4
+  m.author = "algun author"
+  m.message = "aqui va algun mensaje"
+  m.save
+end
+#contar los mensajes del usuario 4
+
+puts us4.message.count
+puts Message.where(user: us4).count
+puts "tarea 20, hecha"
+
+#tarea 21
+po2 = Post.all[1]
+puts "antes => #{po2.user.first_name}"
+#captura el ultimo usuario en la variable ulu
+ulu = User.all.last
+
+po2.user = ulu
+po2.save
+puts"despues =>#{po2.user.first_name}"
+puts "tarea 21, hecha"
+
+#tarea 22
+po2 = Post.all[1]
+po2.content = "un nuevo contenido modificado"
+po2.save
+puts po2.errors.full_messages
+puts "content: #(po2.content)"
+
+#tarea 23
+us3 = User.find(3)
+owners = us3.owner
+blog_ids = owners.pluck(:blog_id)
+blogs = Blog.where(id: blog_ids)
+
+puts "blogs del usuario 3: #{blogs}"
+puts "tarea 23, hecha"
+
+#tarea 24
+
+us3 = User.find(3)
+us3 = User.where(first_name: "Usuario 3").first
+puts us3.post
+puts Post.where(user: us3)
+puts "tarea 24, hecha"
+
+#tarea 25
+
+
+us3 = User.find(3)
+us3 = User.where(first_name: "Usuario 3").first
+puts us3.message
+puts Message.where(user: us3)
+
+puts "tarea 25, hecha"
+
+
+
 
 
 
